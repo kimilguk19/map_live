@@ -30,7 +30,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  kakao_map_sdk: ^1.1.4
+    # 현재 플러터(Flutter)에서 웹용 카카오 지도 라이브러리를 직접 지원하는 공식 플러그인이나 SDK는 없다.
+  # 그래서, 간단히 지도를 보여주는 앱만 만들어 본다. https://pub.dev/packages/kakao_map_sdk
+  # 카카오맵 맵을 플러터 크롬에서 kakao_map_sdk를 사용하는 방법(위)
+  
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
