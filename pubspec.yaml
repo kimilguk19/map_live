@@ -30,6 +30,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.4.0
   kakao_map_sdk: ^1.1.4
     # 현재 플러터(Flutter)에서 웹용 카카오 지도 라이브러리를 직접 지원하는 공식 플러그인이나 SDK는 없다.
   # 그래서, 간단히 지도를 보여주는 앱만 만들어 본다. https://pub.dev/packages/kakao_map_sdk
