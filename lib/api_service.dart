@@ -30,22 +30,9 @@ class ApiService {
   // API의 기본 URL
   final String _baseUrl = 'https://apis.data.go.kr/5690000/sjElectricWheelchairFastCharger/sj_00000860?serviceKey=PLJPmKeBFGOkoxgAoLJgT962Uh0QPWijxPNQ%2Bl%2B4o24r9R%2BqbclT0Fc9xSamDrGiMYAF4CrpJLaDOsKZ%2FDoN%2Bw%3D%3D&pageIndex=1&pageUnit=20&dataTy=json&searchCondition=fclty_Nm';
 
-  // 특정 ID의 데이터를 가져오는 메소드 우리수업에서 사용하지 않기때문에 삭제
-  Future<ApiData> fetchData(int id) async {
-    final response = await http.get(Uri.parse('$_baseUrl/posts/$id'));
-
-    if (response.statusCode == 200) {
-      // 요청이 성공하면 JSON을 파싱합니다.
-      return ApiData.fromJson(jsonDecode(response.body));
-    } else {
-      // 요청이 실패하면 예외를 발생시킵니다.
-      throw Exception('Failed to load data');
-    }
-  }
-
   // 모든 데이터를 리스트 형태로 가져오는 메소드 (우리수업에서는 $_baseUrl만 사용하기 때문에 수정)
   Future<List<ApiData>> fetchAllData() async {
-    final response = await http.get(Uri.parse('$_baseUrl/posts')); // /posts 제거
+    final response = await http.get(Uri.parse('$_baseUrl')); // /posts 제거
 
     if (response.statusCode == 200) {
       // JSON 배열을 파싱합니다.
