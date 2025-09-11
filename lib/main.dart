@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kakao_map_sdk/kakao_map_sdk.dart'; // 외부 패키지 추가
+import 'api_service.dart'; // ApiService 임포트
 
 void main() {
   runApp(KakaoMapPage());
@@ -17,18 +18,34 @@ class KakaoMapPage extends StatefulWidget {
 }
 
 class _KakaoMapPageState extends State<KakaoMapPage> {
+  final ApiService _apiService = ApiService();
   // 샘플 위치 데이터
-  final List<Location> locations = [
+  List<Location> locations = [
     Location('서울 시청', const LatLng(37.566535, 126.977969)),
     Location('부산 시청', const LatLng(35.179554, 129.075642)),
     Location('카카오 스페이스', const LatLng(33.450701, 126.570667)),
   ];
   // 현재 선택된 위치
   late Location _selectedLocation;
+
   @override
   void initState() {
     super.initState();
     _selectedLocation = locations[0]; // 초기 위치 설정
+    _loadData(); //stful 생명주기함수 중 초기화 함수에서 데이터 로드
+  }
+
+  Future<void> _loadData() async { // locations가 재정의 되기 때문에 상단의 final 제거필요
+    try {
+      locations = await _apiService.fetchAllData();
+      setState(() {
+        if(locations.isNotEmpty) {
+          _selectedLocation = locations[0]; // 초기 위치 설정
+        }
+      });
+    } catch(e) {
+     print('Error fetching locations: $e');
+    }    
   }
   late KakaoMapController controller; // controller 클래스 객체 생성
   // 위치데이터를 가지고 마커 오버레이를 지도에 등록합니다.
@@ -44,7 +61,7 @@ class _KakaoMapPageState extends State<KakaoMapPage> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(title: const Text('카카오맵 예제')),
+        appBar: AppBar(title: const Text('세종특별자치시 전동휠체어급속충전기 위치')),
         body: Column(
           children: [
             Padding(
